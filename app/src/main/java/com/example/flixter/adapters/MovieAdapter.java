@@ -1,6 +1,7 @@
 package com.example.flixter.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.flixter.Movie;
+import com.example.flixter.MovieDetailsActivity;
 import com.example.flixter.R;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -74,7 +78,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
+            int pos = getAdapterPosition();
 
+            if (pos != RecyclerView.NO_POSITION) {
+                Movie mov = movies.get(pos);
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(mov));
+                context.startActivity(intent);
+            }
         }
     }
 }
