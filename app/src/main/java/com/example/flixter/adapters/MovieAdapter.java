@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,20 +66,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         }
 
         public void bind(Movie movie) {
+            int placehold = R.drawable.flicks_movie_placeholder;
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             String imageURL;
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageURL = movie.getBackdropPath();
-            else
+                placehold = R.drawable.flicks_backdrop_placeholder;
+            } else {
                 imageURL = movie.getPosterPath();
+                placehold = R.drawable.flicks_movie_placeholder;
+            }
 
             Glide.with(context)
                     .load(imageURL)
                     .centerCrop().transform(new RoundedCorners(100))
-                    //.apply(RequestOptions.bitmapTransform(new RoundedCorners(14)))
-                    .placeholder(R.drawable.flicks_movie_placeholder)
-                    .error(R.drawable.flicks_movie_placeholder)
+                    .placeholder(placehold)
                     .into(ivPoster);
         }
 

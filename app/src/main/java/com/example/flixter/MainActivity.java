@@ -25,6 +25,8 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
     public static final String NOW_PLAYING = "https://api.themoviedb.org/3/movie/now_playing?api_key=9cf5af5129f4f863d5cf57a867a4084c";
     List<Movie> movieList;
+    //private ActivitySimpleBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
